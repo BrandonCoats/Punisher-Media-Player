@@ -13,7 +13,7 @@ public class Main  extends Application{
 	}
 public void start(Stage primaryStage) throws Exception
 {
-	Button button = new Button("Fuck you bitch");
+	Button button = new Button("Play Music");
 	StackPane root = new StackPane();
 	root.getChildren().add(button);
 	Scene scene = new Scene(root);
