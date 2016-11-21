@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.punisher.play.Scene&apos; to &apos;Player&apos;&#x0D;&#x0A;- Original project: &apos;Punisher Media Player&apos;&#x0D;&#x0A;- Original element: &apos;com.punisher.play.Scene&apos;&#x0D;&#x0A;- Renamed element: &apos;com.punisher.play.Player&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Scene&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.punisher.play{Scene.java[Scene" matchStrategy="1" name="Player" qualified="false" references="true" similarDeclarations="false" stamp="1479742707348" textual="false" version="1.0"/>
+</session>

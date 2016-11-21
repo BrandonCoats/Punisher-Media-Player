@@ -1,0 +1,13 @@
+package com.punisher.play;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+
+	}
+public void start(Stage primaryStage) throws exception
+{
+	
+}
+}

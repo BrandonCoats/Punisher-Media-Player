@@ -1,0 +1,15 @@
+package com.punisher.play;
+
+import javafx.stage.Stage;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+
+	}
+public void start(Stage primaryStage) throws Exception
+{
+	
+}
+}
