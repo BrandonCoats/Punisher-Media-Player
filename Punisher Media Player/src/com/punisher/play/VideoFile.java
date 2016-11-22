@@ -42,22 +42,22 @@ public class VideoFile {
 		MediaView viewer = new MediaView(mediaPlayer);
 		
 		 DoubleProperty width = viewer.fitWidthProperty();
-		    DoubleProperty height = viewer.fitHeightProperty();
-		    width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-		    height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
-		    viewer.setPreserveRatio(true);
+		 DoubleProperty height = viewer.fitHeightProperty();
+		 width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+		 height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+		 viewer.setPreserveRatio(true);
 
 
-		    StackPane root = new StackPane();
-		    root.getChildren().add(viewer);
+		 StackPane root = new StackPane();
+		 root.getChildren().add(viewer);
 
-		    //set the Scene
-		    Scene scenes = new Scene(root, 500, 500, Color.BLACK);
-		    stage.setScene(scenes);
-		    stage.setTitle("Hard Coded video");
-		    stage.setFullScreen(true);
-		    stage.show();   
-		
+		 //set the Scene
+		 Scene scenes = new Scene(root, 500, 500, Color.BLACK);
+		 stage.setScene(scenes);
+		 stage.setTitle("Hard Coded video");
+		 stage.setFullScreen(true);
+		 stage.show();   
+		 
 		mediaPlayer.play();
 	}
 }

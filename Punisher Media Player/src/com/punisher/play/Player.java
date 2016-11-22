@@ -1,10 +1,14 @@
 package com.punisher.play;
 
+
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,8 +27,8 @@ public class Player extends Application{
 		}
 		});
 		
-		/*Button video = new Button("Play video");
-		button.setOnAction(new EventHandler<ActionEvent>(){
+		Button video = new Button("Play video");
+		video.setOnAction(new EventHandler<ActionEvent>(){
 		
 		@Override
 		public void handle(ActionEvent event)
@@ -32,12 +36,18 @@ public class Player extends Application{
 			VideoFile video = new VideoFile();
 			video.PlayVideoFile(primaryStage);
 		}
-		});*/
+		});
 		
-		StackPane root = new StackPane();
-		root.getChildren().add(button);
+		 FlowPane flow = new FlowPane();
+		 flow.setPadding(new Insets(10, 10, 10, 10));
+		 flow.setStyle("-fx-background-color: DAE6F3;");
+		 flow.setHgap(5);
+		 flow.getChildren().addAll(button, video);
+		
+		//StackPane root = new StackPane();
+		//root.getChildren().add(button);
 		//root.getChildren().add(video);
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(flow);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

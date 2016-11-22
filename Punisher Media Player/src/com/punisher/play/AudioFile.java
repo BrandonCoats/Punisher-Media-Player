@@ -45,18 +45,18 @@ public class AudioFile {
 		
 		MediaView viewer = new MediaView(mediaPlayer);
 	
-		    viewer.setPreserveRatio(true);
+		viewer.setPreserveRatio(true);
 
 
-		    StackPane root = new StackPane();
-		    root.getChildren().add(viewer);
+		StackPane root = new StackPane();
+		root.getChildren().add(viewer);
 
-		    //set the Scene
-		    Scene scenes = new Scene(root, 500, 500, Color.BLACK);
-		    stage.setScene(scenes);
-		    stage.setTitle("Hard Coded audio");
+		//set the Scene
+		Scene scenes = new Scene(root, 500, 500, Color.BLACK);
+		stage.setScene(scenes);
+		stage.setTitle("Hard Coded audio");
 		    
-		    stage.show();   
+		stage.show();   
 		
 		mediaPlayer.play();
 	}
