@@ -54,7 +54,7 @@ public class VideoFile {
 		    //set the Scene
 		    Scene scenes = new Scene(root, 500, 500, Color.BLACK);
 		    stage.setScene(scenes);
-		    stage.setTitle("Riddle Game");
+		    stage.setTitle("Hard Coded video");
 		    stage.setFullScreen(true);
 		    stage.show();   
 		

@@ -18,14 +18,25 @@ public class Player extends Application{
 		@Override
 		public void handle(ActionEvent event)
 		{
-			VideoFile video = new VideoFile();
-			video.PlayVideoFile(primaryStage);
-			//AudioFile audio = new AudioFile();
-			//audio.PlayAudioFile();
+			AudioFile audio = new AudioFile();
+			audio.PlayAudioFile(primaryStage);
 		}
 		});
+		
+		/*Button video = new Button("Play video");
+		button.setOnAction(new EventHandler<ActionEvent>(){
+		
+		@Override
+		public void handle(ActionEvent event)
+		{
+			VideoFile video = new VideoFile();
+			video.PlayVideoFile(primaryStage);
+		}
+		});*/
+		
 		StackPane root = new StackPane();
 		root.getChildren().add(button);
+		//root.getChildren().add(video);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
