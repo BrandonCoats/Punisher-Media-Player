@@ -14,5 +14,7 @@ public class Main {
 		//AudioFile audio = new AudioFile();
 		//audio.PlayAudioFile();
 		
+		//VideoFile video = new VideoFile();
+		//video.PlayVideoFile();
 	}
 }

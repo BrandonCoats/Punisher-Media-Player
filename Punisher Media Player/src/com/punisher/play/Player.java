@@ -18,10 +18,10 @@ public class Player extends Application{
 		@Override
 		public void handle(ActionEvent event)
 		{
-			//VideoFile video = new VideoFile();
-			//video.PlayVideoFile();
-			AudioFile audio = new AudioFile();
-			audio.PlayAudioFile();
+			VideoFile video = new VideoFile();
+			video.PlayVideoFile(primaryStage);
+			//AudioFile audio = new AudioFile();
+			//audio.PlayAudioFile();
 		}
 		});
 		StackPane root = new StackPane();
