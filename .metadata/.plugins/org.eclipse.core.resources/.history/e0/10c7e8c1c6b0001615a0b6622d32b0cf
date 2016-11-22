@@ -1,7 +1,6 @@
 package com.punisher.play;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,11 +13,10 @@ public class Player extends Application{
 	{
 		Button button = new Button("Play Music");
 		button.setOnAction(new EventHandler<ActionEvent>(){
-		
+		}
 		@Override
 		public void handle(ActionEvent event)
 		{
-			System.out.println("Song here");
 		}
 		});
 		StackPane root = new StackPane();
