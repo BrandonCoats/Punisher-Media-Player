@@ -11,7 +11,10 @@ public class Main {
 		
 		//throwing error
 		
-		AudioFile audio = new AudioFile();
-		audio.PlayAudioFile();
+		//AudioFile audio = new AudioFile();
+		//audio.PlayAudioFile();
+		
+		VideoFile video = new VideoFile();
+		video.PlayVideoFile();
 	}
 }
