@@ -18,7 +18,10 @@ public class Player extends Application{
 		@Override
 		public void handle(ActionEvent event)
 		{
-			System.out.println("Song here");
+			//VideoFile video = new VideoFile();
+			//video.PlayVideoFile();
+			AudioFile audio = new AudioFile();
+			audio.PlayAudioFile();
 		}
 		});
 		StackPane root = new StackPane();
