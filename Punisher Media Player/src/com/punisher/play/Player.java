@@ -2,6 +2,8 @@ package com.punisher.play;
 
 
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,32 +20,53 @@ public class Player extends Application{
 	{
 		Button button = new Button("Play Music");
 		button.setOnAction(new EventHandler<ActionEvent>(){
-		
-		@Override
-		public void handle(ActionEvent event)
-		{
-			AudioFile audio = new AudioFile();
-			audio.PlayAudioFile(primaryStage);
-		}
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+
+				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Audio Files", "*.mp3");
+				File file = searchFile(primaryStage, filter);
+
+				if(file != null){
+					AudioFile audio = new AudioFile(file);
+					audio.PlayAudioFile(primaryStage);
+				}
+				
+				
+				
+//				AudioFile audio = new AudioFile();
+//				audio.PlayAudioFile(primaryStage);
+			}
 		});
-		
+
 		Button video = new Button("Play video");
 		video.setOnAction(new EventHandler<ActionEvent>(){
-		
-		@Override
-		public void handle(ActionEvent event)
-		{
-			VideoFile video = new VideoFile();
-			video.PlayVideoFile(primaryStage);
-		}
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+
+				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
+				File file = searchFile(primaryStage, filter);
+
+				if(file != null){
+					VideoFile video = new VideoFile(file);
+					video.PlayVideoFile(primaryStage);
+				}
+
+//
+//				VideoFile video = new VideoFile();
+//				video.PlayVideoFile(primaryStage);
+			}
 		});
-		
-		 FlowPane flow = new FlowPane();
-		 flow.setPadding(new Insets(10, 10, 10, 10));
-		 flow.setStyle("-fx-background-color: DAE6F3;");
-		 flow.setHgap(5);
-		 flow.getChildren().addAll(button, video);
-		
+
+		FlowPane flow = new FlowPane();
+		flow.setPadding(new Insets(10, 10, 10, 10));
+		flow.setStyle("-fx-background-color: DAE6F3;");
+		flow.setHgap(5);
+		flow.getChildren().addAll(button, video);
+
 		//StackPane root = new StackPane();
 		//root.getChildren().add(button);
 		//root.getChildren().add(video);
@@ -55,10 +78,14 @@ public class Player extends Application{
 	{
 		launch();
 	}
-	public void SearchFile(Stage primaryStage)
+	public File searchFile(Stage primaryStage, FileChooser.ExtensionFilter filter)
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Choose a file");
+		fileChooser.setTitle("Open file");
+		fileChooser.getExtensionFilters().add(filter);
+		File file = fileChooser.showOpenDialog(primaryStage);
+		return file;
+
 		//primaryStage.addEventHandler(eventType, eventHandler);
 	}
 }

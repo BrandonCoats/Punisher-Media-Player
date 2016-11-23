@@ -18,6 +18,7 @@ import java.io.File;
 
 public class AudioFile {
 	
+	private File file;
 	private String fileName;
 	
 	//To do store more info such as artist, song title, album
@@ -32,6 +33,11 @@ public class AudioFile {
 		fileName = fName;
 	}
 	
+	public AudioFile(File file)
+	{
+		this.file = file;;
+	}
+	
 	public String getFileName()
 	{
 		return fileName;
@@ -39,7 +45,7 @@ public class AudioFile {
 	
 	public void PlayAudioFile(Stage stage)
 	{
-		Media sound = new Media(new File(fileName).toURI().toString());
+		Media sound = new Media(file.toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		
 		

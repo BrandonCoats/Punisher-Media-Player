@@ -14,19 +14,24 @@ import javafx.stage.Stage;
 
 public class VideoFile {
 	
-
+	private File file;
 	private String fileName;
 	
 	//To do store more info such as artist, song title, album
 	
 	public VideoFile()
 	{
-		fileName = "Content/Video/SouthParkSeason16Episode3.mp4";
+		file = new File("Content/Video/SouthParkSeason16Episode3.mp4");
 	}
 	
 	public VideoFile(String fName)
 	{
 		fileName = fName;
+	}
+	
+	public VideoFile(File file)
+	{
+		this.file = file;
 	}
 	
 	public String getFileName()
@@ -37,7 +42,7 @@ public class VideoFile {
 	public void PlayVideoFile(Stage stage)
 	{
 		//video works a little different
-		Media sound = new Media(new File(fileName).toURI().toString());
+		Media sound = new Media(file.toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		MediaView viewer = new MediaView(mediaPlayer);
 		
