@@ -20,8 +20,8 @@ import javafx.stage.Stage;
 public class Player extends Application{
 	public void start(Stage primaryStage) throws Exception
 	{
-		Image image = new Image(getClass().getResourceAsStream("/Content/Images/"));
-		Button music = new Button(">");
+		Image image = new Image("file:playimg.png");
+		Button music = new Button("Play", new ImageView(image));
         music.setGraphic(new ImageView(image));
 		music.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -44,7 +44,7 @@ public class Player extends Application{
 			}
 		});
 
-		Button video = new Button(">");
+		Button video = new Button("Play Video");
 		video.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -82,7 +82,7 @@ public class Player extends Application{
 				
 			}
 		});
-		Button pause = new Button("<<");
+		Button pause = new Button("Pause");
 		pause.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
