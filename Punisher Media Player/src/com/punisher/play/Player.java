@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -18,7 +20,9 @@ import javafx.stage.Stage;
 public class Player extends Application{
 	public void start(Stage primaryStage) throws Exception
 	{
+		Image image = new Image(getClass().getResourceAsStream("/Content/Images/"));
 		Button music = new Button(">");
+        music.setGraphic(new ImageView(image));
 		music.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
