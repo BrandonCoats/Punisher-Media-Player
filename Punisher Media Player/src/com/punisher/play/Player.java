@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 public class Player extends Application{
 	public void start(Stage primaryStage) throws Exception
 	{
-		Image image = new Image("file:playimg.png");
-		Button music = new Button("Play", new ImageView(image));
+		Image playimage = new Image("file:playimg.png");
+		Button music = new Button("Play", new ImageView(playimage));
 		music.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -101,10 +101,7 @@ public class Player extends Application{
 		flow.setStyle("-fx-background-color: DAE6F3;");
 		flow.setHgap(5);
 		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward);
-
-		//StackPane root = new StackPane();
-		//root.getChildren().add(button);
-		//root.getChildren().add(video);
+		
 		Scene scene = new Scene(flow);
 		primaryStage.setScene(scene);
 		primaryStage.show();
