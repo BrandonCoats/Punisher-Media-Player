@@ -4,16 +4,20 @@ package com.punisher.play;
 
 import java.io.File;
 
+import com.sun.javafx.geom.Rectangle;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -22,7 +26,6 @@ public class Player extends Application{
 	{
 		Image image = new Image("file:playimg.png");
 		Button music = new Button("Play", new ImageView(image));
-        music.setGraphic(new ImageView(image));
 		music.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -91,11 +94,13 @@ public class Player extends Application{
 				
 			}
 		});
+		ScrollPane playlist = new ScrollPane();
+		playlist.setPrefSize(100, 200);
 		FlowPane flow = new FlowPane();
 		flow.setPadding(new Insets(10, 10, 10, 10));
 		flow.setStyle("-fx-background-color: DAE6F3;");
 		flow.setHgap(5);
-		flow.getChildren().addAll(Rewind,pause,music, video,FastForward);
+		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward);
 
 		//StackPane root = new StackPane();
 		//root.getChildren().add(button);
