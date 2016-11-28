@@ -33,8 +33,6 @@ public class Player extends Application{
 					audio.PlayAudioFile(primaryStage);
 				}
 				
-				
-				
 //				AudioFile audio = new AudioFile();
 //				audio.PlayAudioFile(primaryStage);
 			}

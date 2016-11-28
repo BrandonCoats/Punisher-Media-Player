@@ -1,9 +1,6 @@
 package com.punisher.play;
-import java.io.File;
-
 
 import java.io.File;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.Scene;
@@ -13,8 +10,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 public class AudioFile {
 	
@@ -47,12 +42,9 @@ public class AudioFile {
 	{
 		Media sound = new Media(file.toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		
-		
 		MediaView viewer = new MediaView(mediaPlayer);
 	
 		viewer.setPreserveRatio(true);
-
 
 		StackPane root = new StackPane();
 		root.getChildren().add(viewer);
