@@ -9,12 +9,5 @@ public class Main {
 		Player player = new Player();
 		player.Launcher();
 		
-		//throwing error
-		
-		//AudioFile audio = new AudioFile();
-		//audio.PlayAudioFile();
-		
-		//VideoFile video = new VideoFile();
-		//video.PlayVideoFile();
 	}
 }

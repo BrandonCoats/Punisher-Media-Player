@@ -18,8 +18,8 @@ import javafx.stage.Stage;
 public class Player extends Application{
 	public void start(Stage primaryStage) throws Exception
 	{
-		Button button = new Button("Play Music");
-		button.setOnAction(new EventHandler<ActionEvent>(){
+		Button music = new Button(">");
+		music.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
 			public void handle(ActionEvent event)
@@ -40,7 +40,7 @@ public class Player extends Application{
 			}
 		});
 
-		Button video = new Button("Play video");
+		Button video = new Button(">");
 		video.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -60,12 +60,38 @@ public class Player extends Application{
 //				video.PlayVideoFile(primaryStage);
 			}
 		});
+		Button FastForward = new Button(">>");
+		FastForward.setOnAction(new EventHandler<ActionEvent>(){
 
+			@Override
+			public void handle(ActionEvent event)
+			{
+				
+			}
+		});
+		Button Rewind = new Button("<<");
+		Rewind.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				
+			}
+		});
+		Button pause = new Button("<<");
+		pause.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				
+			}
+		});
 		FlowPane flow = new FlowPane();
 		flow.setPadding(new Insets(10, 10, 10, 10));
 		flow.setStyle("-fx-background-color: DAE6F3;");
 		flow.setHgap(5);
-		flow.getChildren().addAll(button, video);
+		flow.getChildren().addAll(Rewind,pause,music, video,FastForward);
 
 		//StackPane root = new StackPane();
 		//root.getChildren().add(button);
