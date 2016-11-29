@@ -47,7 +47,7 @@ public class Player extends Application{
 					Media sound = audio.returnAudioFile();
 					player = new MediaPlayer(sound);
 
-				//	audio.PlayAudioFile(primaryStage);
+					//	audio.PlayAudioFile(primaryStage);
 				}
 
 
@@ -94,7 +94,7 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-//this is where you rewind
+				//this is where you rewind
 			}
 		});
 		Button pause = new Button("Pause");
@@ -110,7 +110,7 @@ public class Player extends Application{
 		playlist.setPrefSize(100, 200);
 		VBox content = new VBox();
 		playlist.setContent(content);
-//try to add content to the playlist
+		//try to add content to the playlist
 		Label label = new Label("hello");
 		content.getChildren().add(label);
 		//hello
