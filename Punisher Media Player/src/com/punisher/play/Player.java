@@ -84,7 +84,7 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-
+//this is where you rewind
 			}
 		});
 		Button pause = new Button("Pause");
