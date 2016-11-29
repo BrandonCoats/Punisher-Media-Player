@@ -19,11 +19,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Player extends Application{
+	MediaPlayer player;
 	public void start(Stage primaryStage) throws Exception
 	{
 		Image playimage = new Image("file:playimg.png");
@@ -39,7 +42,12 @@ public class Player extends Application{
 
 				if(file != null){
 					AudioFile audio = new AudioFile(file);
-				//	audio.PlayAudioFile(primaryStage);
+
+					//audio.PlayAudioFile(primaryStage);
+					Media sound = audio.returnAudioFile();
+					player = new MediaPlayer(sound);
+
+					//	audio.PlayAudioFile(primaryStage);
 				}
 
 
@@ -62,6 +70,8 @@ public class Player extends Application{
 				if(file != null){
 					VideoFile video = new VideoFile(file);
 					//video.PlayVideoFile(primaryStage);
+					Media recording = video.returnVideoFile();
+					player = new MediaPlayer(recording);
 				}
 
 				//
@@ -84,7 +94,7 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-//this is where you rewind
+				//this is where you rewind
 			}
 		});
 		Button pause = new Button("Pause");
@@ -93,14 +103,14 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-
+				player.pause();
 			}
 		});
 		ScrollPane playlist = new ScrollPane();
 		playlist.setPrefSize(100, 200);
 		VBox content = new VBox();
 		playlist.setContent(content);
-//try to add content to the playlist
+		//try to add content to the playlist
 		Label label = new Label("hello");
 		content.getChildren().add(label);
 		//hello
