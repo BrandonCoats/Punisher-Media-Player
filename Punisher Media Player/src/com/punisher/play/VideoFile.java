@@ -17,6 +17,7 @@ public class VideoFile {
 	private File file;
 	private String fileName;
 	
+	
 	//To do store more info such as artist, song title, album
 	
 	public VideoFile()
@@ -39,18 +40,14 @@ public class VideoFile {
 		return fileName;
 	}
 	
-	public void PlayVideoFile(Stage stage)
+	/*public void PlayVideoFile(Stage stage, MediaPlayer mediaPlayer)
 	{
 		//video works a little different
 		Media sound = new Media(file.toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		MediaView viewer = new MediaView(mediaPlayer);
+		mediaPlayer = new MediaPlayer(sound);
 		
-		DoubleProperty width = viewer.fitWidthProperty();
-		DoubleProperty height = viewer.fitHeightProperty();
-		width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-		height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
-		viewer.setPreserveRatio(true);
+		
+		
 
 
 		StackPane root = new StackPane();
@@ -64,5 +61,11 @@ public class VideoFile {
 		stage.show();   
 		 
 		mediaPlayer.play();
+	}*/
+	
+	public Media returnVideoFile()
+	{
+		Media video = new Media(file.toURI().toString());
+		return video;
 	}
 }
