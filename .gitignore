@@ -2,3 +2,5 @@
 Punisher Media Player/.classpath
 Punisher Media Player/.classpath
 /.metadata/.plugins/org.eclipse.core.resources/*.snap
+*.class
+Punisher Media Player/bin/com/punisher/play/Player$1.class
