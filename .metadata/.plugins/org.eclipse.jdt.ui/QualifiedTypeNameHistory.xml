@@ -2,4 +2,7 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javafx.scene.image.Image"/>
 <fullyQualifiedTypeName name="javafx.scene.image.ImageView"/>
+<fullyQualifiedTypeName name="com.sun.javafx.geom.Rectangle"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ScrollPane"/>
+<fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
 </qualifiedTypeNameHistroy>
