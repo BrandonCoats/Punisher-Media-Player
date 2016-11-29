@@ -40,18 +40,14 @@ public class VideoFile {
 		return fileName;
 	}
 	
-	public void PlayVideoFile(Stage stage, MediaPlayer mediaPlayer)
+	/*public void PlayVideoFile(Stage stage, MediaPlayer mediaPlayer)
 	{
 		//video works a little different
 		Media sound = new Media(file.toURI().toString());
 		mediaPlayer = new MediaPlayer(sound);
-		MediaView viewer = new MediaView(mediaPlayer);
 		
-		DoubleProperty width = viewer.fitWidthProperty();
-		DoubleProperty height = viewer.fitHeightProperty();
-		width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-		height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
-		viewer.setPreserveRatio(true);
+		
+		
 
 
 		StackPane root = new StackPane();
@@ -65,7 +61,7 @@ public class VideoFile {
 		stage.show();   
 		 
 		mediaPlayer.play();
-	}
+	}*/
 	
 	public Media returnVideoFile()
 	{

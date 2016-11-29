@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +29,7 @@ import javafx.scene.media.Media;
 
 public class Player extends Application{
 	MediaPlayer mediaPlayer;
+	MediaView viewer;
 	public void start(Stage primaryStage) throws Exception
 	{
 		Image playimage = new Image("file:playimg.png");
@@ -46,6 +48,7 @@ public class Player extends Application{
 						AudioFile audio = new AudioFile(file);
 						Media sound = audio.returnAudioFile();
 						mediaPlayer = new MediaPlayer(sound);
+						viewer = new MediaView(mediaPlayer);
 					}
 				}
 				else
@@ -73,6 +76,12 @@ public class Player extends Application{
 						VideoFile video = new VideoFile(file);
 						Media recording = video.returnVideoFile();
 						mediaPlayer = new MediaPlayer(recording);
+						
+						DoubleProperty width = viewer.fitWidthProperty();
+						DoubleProperty height = viewer.fitHeightProperty();
+						width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+						height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+						viewer.setPreserveRatio(true);
 					}
 				}
 				else
@@ -119,7 +128,8 @@ public class Player extends Application{
 		flow.setPadding(new Insets(10, 10, 10, 10));
 		flow.setStyle("-fx-background-color: DAE6F3;");
 		flow.setHgap(5);
-		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward);
+		flow.getChildren().addAll(playlist,Rewind,pause,music, video, FastForward);
+		//flow.getChildren().add(viewer);
 		
 		Scene scene = new Scene(flow);
 		primaryStage.setScene(scene);
