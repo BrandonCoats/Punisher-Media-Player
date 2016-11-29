@@ -17,6 +17,7 @@ public class VideoFile {
 	private File file;
 	private String fileName;
 	
+	
 	//To do store more info such as artist, song title, album
 	
 	public VideoFile()
@@ -39,11 +40,11 @@ public class VideoFile {
 		return fileName;
 	}
 	
-	public void PlayVideoFile(Stage stage)
+	public void PlayVideoFile(Stage stage, MediaPlayer mediaPlayer)
 	{
 		//video works a little different
 		Media sound = new Media(file.toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer = new MediaPlayer(sound);
 		MediaView viewer = new MediaView(mediaPlayer);
 		
 		DoubleProperty width = viewer.fitWidthProperty();
@@ -64,5 +65,11 @@ public class VideoFile {
 		stage.show();   
 		 
 		mediaPlayer.play();
+	}
+	
+	public Media returnVideoFile()
+	{
+		Media video = new Media(file.toURI().toString());
+		return video;
 	}
 }

@@ -17,11 +17,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.scene.media.Media;
+
 
 public class Player extends Application{
+	MediaPlayer mediaPlayer;
 	public void start(Stage primaryStage) throws Exception
 	{
 		Image playimage = new Image("file:playimg.png");
@@ -31,13 +37,20 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-
+				if(mediaPlayer == null)
+				{
 				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Audio Files", "*.mp3");
 				File file = searchFile(primaryStage, filter);
 
-				if(file != null){
-					AudioFile audio = new AudioFile(file);
-					audio.PlayAudioFile(primaryStage);
+					if(file != null){
+						AudioFile audio = new AudioFile(file);
+						Media sound = audio.returnAudioFile();
+						mediaPlayer = new MediaPlayer(sound);
+					}
+				}
+				else
+				{
+				mediaPlayer.play();
 				}
 				
 //				AudioFile audio = new AudioFile();
@@ -51,14 +64,22 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
+				if(mediaPlayer == null)
+				{
+					FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
+					File file = searchFile(primaryStage, filter);
 
-				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
-				File file = searchFile(primaryStage, filter);
-
-				if(file != null){
-					VideoFile video = new VideoFile(file);
-					video.PlayVideoFile(primaryStage);
+					if(file != null){
+						VideoFile video = new VideoFile(file);
+						Media recording = video.returnVideoFile();
+						mediaPlayer = new MediaPlayer(recording);
+					}
 				}
+				else
+				{
+					mediaPlayer.play();
+				}
+				
 
 //
 //				VideoFile video = new VideoFile();
@@ -89,7 +110,7 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-				
+				mediaPlayer.pause();
 			}
 		});
 		ScrollPane playlist = new ScrollPane();

@@ -38,25 +38,10 @@ public class AudioFile {
 		return fileName;
 	}
 	
-	public void PlayAudioFile(Stage stage)
+	public Media returnAudioFile()
 	{
 		Media sound = new Media(file.toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		MediaView viewer = new MediaView(mediaPlayer);
-	
-		viewer.setPreserveRatio(true);
-
-		StackPane root = new StackPane();
-		root.getChildren().add(viewer);
-
-		//set the Scene
-		Scene scenes = new Scene(root, 500, 500, Color.BLACK);
-		stage.setScene(scenes);
-		stage.setTitle("Hard Coded audio");
-		    
-		stage.show();   
-		
-		mediaPlayer.play();
+		return sound;
 	}
 	
 }
