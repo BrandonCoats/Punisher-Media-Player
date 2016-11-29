@@ -103,7 +103,7 @@ public class Player extends Application{
 //try to add content to the playlist
 		Label label = new Label("hello");
 		content.getChildren().add(label);
-		
+		//hello
 		FlowPane flow = new FlowPane();
 		flow.setPadding(new Insets(10, 10, 10, 10));
 		flow.setStyle("-fx-background-color: DAE6F3;");
