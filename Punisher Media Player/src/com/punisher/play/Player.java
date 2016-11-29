@@ -39,7 +39,7 @@ public class Player extends Application{
 
 				if(file != null){
 					AudioFile audio = new AudioFile(file);
-					audio.PlayAudioFile(primaryStage);
+				//	audio.PlayAudioFile(primaryStage);
 				}
 
 
@@ -61,7 +61,7 @@ public class Player extends Application{
 
 				if(file != null){
 					VideoFile video = new VideoFile(file);
-					video.PlayVideoFile(primaryStage);
+					//video.PlayVideoFile(primaryStage);
 				}
 
 				//
