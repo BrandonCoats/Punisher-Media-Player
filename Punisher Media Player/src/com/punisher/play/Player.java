@@ -42,9 +42,13 @@ public class Player extends Application{
 
 				if(file != null){
 					AudioFile audio = new AudioFile(file);
+<<<<<<< HEAD
 					//audio.PlayAudioFile(primaryStage);
 					Media sound = audio.returnAudioFile();
 					player = new MediaPlayer(sound);
+=======
+				//	audio.PlayAudioFile(primaryStage);
+>>>>>>> origin/master
 				}
 
 
@@ -67,8 +71,11 @@ public class Player extends Application{
 				if(file != null){
 					VideoFile video = new VideoFile(file);
 					//video.PlayVideoFile(primaryStage);
+<<<<<<< HEAD
 					Media recording = video.returnVideoFile();
 					player = new MediaPlayer(recording);
+=======
+>>>>>>> origin/master
 				}
 
 				//
