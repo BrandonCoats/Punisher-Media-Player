@@ -7,26 +7,39 @@ import java.io.File;
 import com.sun.javafx.geom.Rectangle;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+
 public class Player extends Application{
 	MediaPlayer player;
+	MediaView mediaView;
+	HBox mediaBar;
+	BorderPane bp = new BorderPane();
+	
 	public void start(Stage primaryStage) throws Exception
 	{
 		Image playimage = new Image("file:playimg.png");
@@ -46,7 +59,7 @@ public class Player extends Application{
 					//audio.PlayAudioFile(primaryStage);
 					Media sound = audio.returnAudioFile();
 					player = new MediaPlayer(sound);
-
+					initializeMediaView();
 					//	audio.PlayAudioFile(primaryStage);
 				}
 
@@ -139,5 +152,58 @@ public class Player extends Application{
 		return file;
 
 		//primaryStage.addEventHandler(eventType, eventHandler);
+	}
+	
+	private void initializeMediaView()
+	{
+		mediaView = new MediaView(player);
+		Pane mvPane = new Pane() {};
+		mvPane.getChildren().add(mediaView);
+        mvPane.setStyle("-fx-background-color: black;");
+        DoubleProperty mvw = mediaView.fitWidthProperty();
+        DoubleProperty mvh = mediaView.fitHeightProperty();
+        mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+        mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+        bp.setCenter(mvPane);
+        
+        initializeMediaBar();
+	}
+	
+	private void initializeMediaBar()
+	{
+		mediaBar = new HBox();
+		mediaBar.setAlignment(Pos.CENTER);
+        mediaBar.setPadding(new Insets(5, 10, 5, 10));
+        BorderPane.setAlignment(mediaBar, Pos.CENTER);
+        
+	}
+	
+	protected boolean CheckMediaStatus()
+	{
+		boolean validStatus = false;
+		Status playerStatus = player.getStatus();
+		if(playerStatus != Status.HALTED || playerStatus != Status.UNKNOWN)
+		{
+			if(playerStatus == Status.PAUSED || playerStatus == Status.READY || playerStatus == Status.STOPPED)
+			{
+				if(CheckIfAtEnd())
+				{
+					player.seek(player.getStartTime());
+				}
+				player.play();
+			}else
+			{
+				player.pause();
+			}
+		}
+		return validStatus;
+		
+	}
+	
+	public boolean CheckIfAtEnd()
+	{
+		boolean isAtEnd;
+		isAtEnd = player.getCurrentTime() == player.getStopTime();
+		return isAtEnd;
 	}
 }
