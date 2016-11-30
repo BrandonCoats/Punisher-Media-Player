@@ -110,15 +110,12 @@ public class Player extends Application{
 		playlist.setPrefSize(100, 200);
 		VBox content = new VBox();
 		playlist.setContent(content);
-		//try to add content to the playlist
+		//add content to the playlist
 		Label label = new Label("hello");
 		content.getChildren().add(label);
-		//hello
-		//force upload
-		//work
 		FlowPane flow = new FlowPane();
 		flow.setPadding(new Insets(10, 10, 10, 10));
-		flow.setStyle("-fx-background-color: DAE6F3;");
+		flow.setStyle("-fx-background-color: white;");
 		flow.setHgap(5);
 		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward);
 
