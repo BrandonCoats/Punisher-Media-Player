@@ -175,11 +175,7 @@ public class Player extends Application{
 				player.pause();
 			}
 		});
-<<<<<<< HEAD
-		mediaBar.getChildren().addAll(Rewind,pause,music, video,FastForward);
-		bp.setBottom(mediaBar);
-=======
-	
+		
 		Button playlistbtn = new Button("PlayList");
 		playlistbtn.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -190,61 +186,9 @@ public class Player extends Application{
 				pc.CreatePlaylist();
 			}
 		});
-		ScrollPane playlist = new ScrollPane();
-		playlist.setPrefSize(100, 200);
-		VBox content = new VBox();
-		playlist.setContent(content);
-		//add content to the playlist
-		Label label = new Label("hello");
-		content.getChildren().add(label);
-		FlowPane flow = new FlowPane();
-		flow.setPadding(new Insets(10, 10, 10, 10));
-		flow.setStyle("-fx-background-color: white;");
-		flow.setHgap(5);
-		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward,playlistbtn);
 
-		Scene scene = new Scene(flow);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-	public void Launcher()
-	{
-		launch();
-	}
-	public File searchFile(Stage primaryStage, FileChooser.ExtensionFilter filter)
-	{
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open file");
-		fileChooser.getExtensionFilters().add(filter);
-		File file = fileChooser.showOpenDialog(primaryStage);
-		return file;
-
-		//primaryStage.addEventHandler(eventType, eventHandler);
-	}
-	
-	private void initializeMediaView()
-	{
-		mediaView = new MediaView(player);
-		Pane mvPane = new Pane() {};
-		mvPane.getChildren().add(mediaView);
-        mvPane.setStyle("-fx-background-color: black;");
-        DoubleProperty mvw = mediaView.fitWidthProperty();
-        DoubleProperty mvh = mediaView.fitHeightProperty();
-        mvw.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
-        mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
-        bp.setCenter(mvPane);
-        
-        initializeMediaBar();
-	}
-	
-	private void initializeMediaBar()
-	{
-		mediaBar = new HBox();
-		mediaBar.setAlignment(Pos.CENTER);
-        mediaBar.setPadding(new Insets(5, 10, 5, 10));
-        BorderPane.setAlignment(mediaBar, Pos.CENTER);
-        
->>>>>>> origin/master
+		mediaBar.getChildren().addAll(Rewind,pause,music, video,FastForward, playlistbtn);
+		bp.setBottom(mediaBar);
 	}
 	
 	protected boolean CheckMediaStatus()
