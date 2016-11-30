@@ -4,24 +4,23 @@ package com.punisher.play;
 
 import java.io.File;
 
-import com.sun.javafx.geom.Rectangle;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -109,10 +108,10 @@ public class Player extends Application{
 		ScrollPane playlist = new ScrollPane();
 		playlist.setPrefSize(100, 200);
 		VBox content = new VBox();
+		//testing new shit
+		content.getChildren().addAll(new Hyperlink("Test"));
 		playlist.setContent(content);
 		//add content to the playlist
-		Label label = new Label("hello");
-		content.getChildren().add(label);
 		FlowPane flow = new FlowPane();
 		flow.setPadding(new Insets(10, 10, 10, 10));
 		flow.setStyle("-fx-background-color: white;");
