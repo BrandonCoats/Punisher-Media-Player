@@ -109,14 +109,24 @@ public class Player extends Application{
 				File file = searchFile((Stage) mediaBar.getScene().getWindow(), filter);
 
 				if(file != null){
-					AudioFile audio = new AudioFile(file);
+					if(player == null || player.getMedia() == null)
+					{
+						AudioFile audio = new AudioFile(file);
 
-					//audio.PlayAudioFile(primaryStage);
-					Media sound = audio.returnAudioFile();
-					player = new MediaPlayer(sound);
-					initializeMediaView();
+						//audio.PlayAudioFile(primaryStage);
+						Media sound = audio.returnAudioFile();
+						player = new MediaPlayer(sound);
+						initializeMediaView();
+
+						CheckMediaStatus();
+					}
+					else
+					{
+						CheckMediaStatus();
+					}
 					//	audio.PlayAudioFile(primaryStage);
 				}
+				
 
 
 
@@ -136,12 +146,21 @@ public class Player extends Application{
 				File file = searchFile((Stage) mediaBar.getScene().getWindow(), filter);
 
 				if(file != null){
-					VideoFile video = new VideoFile(file);
-					//video.PlayVideoFile(primaryStage);
-					Media recording = video.returnVideoFile();
-					player = new MediaPlayer(recording);
-					initializeMediaView();
+					if(player == null || player.getMedia() != null)
+					{
+						VideoFile video = new VideoFile(file);
+						//video.PlayVideoFile(primaryStage);
+						Media recording = video.returnVideoFile();
+						player = new MediaPlayer(recording);
+						initializeMediaView();
+						CheckMediaStatus();
+					}
+					else
+					{
+						CheckMediaStatus();
+					}
 				}
+				
 
 				//
 				//				VideoFile video = new VideoFile();
