@@ -23,13 +23,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -42,97 +40,23 @@ public class Player extends Application{
 	
 	public void start(Stage primaryStage) throws Exception
 	{
-		Image playimage = new Image("file:playimg.png");
-		Button music = new Button("Play", new ImageView(playimage));
-		music.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-
-				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Audio Files", "*.mp3");
-				File file = searchFile(primaryStage, filter);
-
-				if(file != null){
-					AudioFile audio = new AudioFile(file);
-
-					//audio.PlayAudioFile(primaryStage);
-					Media sound = audio.returnAudioFile();
-					player = new MediaPlayer(sound);
-					initializeMediaView();
-					//	audio.PlayAudioFile(primaryStage);
-				}
-
-
-
-				//				AudioFile audio = new AudioFile();
-				//				audio.PlayAudioFile(primaryStage);
-			}
-		});
-
-		Button video = new Button("Play Video");
-		video.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-
-				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
-				File file = searchFile(primaryStage, filter);
-
-				if(file != null){
-					VideoFile video = new VideoFile(file);
-					//video.PlayVideoFile(primaryStage);
-					Media recording = video.returnVideoFile();
-					player = new MediaPlayer(recording);
-				}
-
-				//
-				//				VideoFile video = new VideoFile();
-				//				video.PlayVideoFile(primaryStage);
-			}
-		});
-		Button FastForward = new Button(">>");
-		FastForward.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-
-			}
-		});
-		Button Rewind = new Button("<<");
-		Rewind.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-				//this is where you rewind
-			}
-		});
-		Button pause = new Button("Pause");
-		pause.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-				player.pause();
-			}
-		});
+		
 		ScrollPane playlist = new ScrollPane();
 		playlist.setPrefSize(100, 200);
 		VBox content = new VBox();
 		playlist.setContent(content);
-		//add content to the playlist
+		//try to add content to the playlist
 		Label label = new Label("hello");
 		content.getChildren().add(label);
-		FlowPane flow = new FlowPane();
-		flow.setPadding(new Insets(10, 10, 10, 10));
-		flow.setStyle("-fx-background-color: white;");
-		flow.setHgap(5);
-		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward);
+		initializeMediaView();
+		//hello
+		//force upload
+		//work
+		
+		
+		bp.setLeft(playlist);
 
-		Scene scene = new Scene(flow);
+		Scene scene = new Scene(bp);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -173,6 +97,86 @@ public class Player extends Application{
         mediaBar.setPadding(new Insets(5, 10, 5, 10));
         BorderPane.setAlignment(mediaBar, Pos.CENTER);
         
+        Image playimage = new Image("file:playimg.png");
+		Button music = new Button("Play", new ImageView(playimage));
+		music.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+
+				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Audio Files", "*.mp3");
+				File file = searchFile((Stage) mediaBar.getScene().getWindow(), filter);
+
+				if(file != null){
+					AudioFile audio = new AudioFile(file);
+
+					//audio.PlayAudioFile(primaryStage);
+					Media sound = audio.returnAudioFile();
+					player = new MediaPlayer(sound);
+					initializeMediaView();
+					//	audio.PlayAudioFile(primaryStage);
+				}
+
+
+
+				//				AudioFile audio = new AudioFile();
+				//				audio.PlayAudioFile(primaryStage);
+			}
+		});
+
+		Button video = new Button("Play Video");
+		video.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+
+				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
+				File file = searchFile((Stage) mediaBar.getScene().getWindow(), filter);
+
+				if(file != null){
+					VideoFile video = new VideoFile(file);
+					//video.PlayVideoFile(primaryStage);
+					Media recording = video.returnVideoFile();
+					player = new MediaPlayer(recording);
+					initializeMediaView();
+				}
+
+				//
+				//				VideoFile video = new VideoFile();
+				//				video.PlayVideoFile(primaryStage);
+			}
+		});
+		Button FastForward = new Button(">>");
+		FastForward.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+
+			}
+		});
+		Button Rewind = new Button("<<");
+		Rewind.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				//this is where you rewind
+			}
+		});
+		Button pause = new Button("Pause");
+		pause.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				player.pause();
+			}
+		});
+		mediaBar.getChildren().addAll(Rewind,pause,music, video,FastForward);
+		bp.setBottom(mediaBar);
 	}
 	
 	protected boolean CheckMediaStatus()
