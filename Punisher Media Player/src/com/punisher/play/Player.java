@@ -119,6 +119,17 @@ public class Player extends Application{
 				player.pause();
 			}
 		});
+	
+		Button playlistbtn = new Button("PlayList");
+		playlistbtn.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				PlaylistCreator pc = new PlaylistCreator();
+				pc.CreatePlaylist();
+			}
+		});
 		ScrollPane playlist = new ScrollPane();
 		playlist.setPrefSize(100, 200);
 		VBox content = new VBox();
@@ -130,7 +141,7 @@ public class Player extends Application{
 		flow.setPadding(new Insets(10, 10, 10, 10));
 		flow.setStyle("-fx-background-color: white;");
 		flow.setHgap(5);
-		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward);
+		flow.getChildren().addAll(playlist,Rewind,pause,music, video,FastForward,playlistbtn);
 
 		Scene scene = new Scene(flow);
 		primaryStage.setScene(scene);
