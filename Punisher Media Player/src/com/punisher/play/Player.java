@@ -1,7 +1,5 @@
 package com.punisher.play;
 
-
-
 import java.io.File;
 
 import com.sun.javafx.geom.Rectangle;
@@ -44,10 +42,10 @@ public class Player extends Application{
 	MediaView mediaView;
 	HBox mediaBar;
 	BorderPane bp = new BorderPane();
-	private Duration duration;
-    private Slider timeSlider;
-    private Label playTime;
-    private Slider volumeSlider;
+	Duration duration;
+    Slider timeSlider;
+    Label playTime;
+    Slider volumeSlider;
 	
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -125,9 +123,9 @@ public class Player extends Application{
 
 						//audio.PlayAudioFile(primaryStage);
 						Media sound = audio.returnAudioFile();
+						duration = sound.getDuration();
 						player = new MediaPlayer(sound);
 						initializeMediaView();
-						duration = player.getMedia().getDuration();
 						//CheckMediaStatus();
 					}
 					else
@@ -170,9 +168,10 @@ public class Player extends Application{
 						VideoFile video = new VideoFile(file);
 						//video.PlayVideoFile(primaryStage);
 						Media recording = video.returnVideoFile();
+						duration = recording.getDuration();
 						player = new MediaPlayer(recording);
 						initializeMediaView();
-						duration = player.getMedia().getDuration();
+						
 						//CheckMediaStatus();
 					}
 					else
@@ -271,7 +270,7 @@ public class Player extends Application{
                 public void run() {
                     Duration currentTime = player.getCurrentTime();
                     playTime.setText(formatTime(currentTime, duration));
-                    timeSlider.setDisable(duration.isUnknown());
+                    //timeSlider.setDisable(duration.isUnknown());
                     if (!timeSlider.isDisabled()
                             && duration.greaterThan(Duration.ZERO)
                             && !timeSlider.isValueChanging()) {
