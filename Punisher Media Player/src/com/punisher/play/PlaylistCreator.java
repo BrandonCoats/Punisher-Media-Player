@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import javafx.event.ActionEvent;
@@ -20,11 +21,13 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class PlaylistCreator {
 	
-	ArrayList<String> totalPlaylist = new ArrayList<String>();
+	ArrayList<String> mplaylist = new ArrayList<String>();
 	VBox content = new VBox();
 	String p = "default";
 	Label label;
@@ -38,7 +41,11 @@ public class PlaylistCreator {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				
+				 FileChooser fileChooser = new FileChooser();
+				 fileChooser.setTitle("Adding Music");
+				 fileChooser.getExtensionFilters().addAll(
+				         new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"));
+				  fileChooser.showOpenDialog(Playlist);
 			}
 		});
 		
@@ -53,6 +60,7 @@ public class PlaylistCreator {
 			}
 		});
 		
+		//Code that adds the contents of the folder to the vbox inside of the scrollpane
 		 File f = new File("Content/Audio/");// current directory
 		
 			
@@ -73,6 +81,7 @@ public class PlaylistCreator {
 					e.printStackTrace();
 				}
 		    }
+		 //-----------------------------------------------------------------
 		    
 		ScrollPane playlist = new ScrollPane();
 		playlist.setPrefSize(100, 200);
@@ -92,9 +101,9 @@ public class PlaylistCreator {
 		
 	}
 
-	public String addSong(String song) {
+	private void addSong() {
+	
 		
-		return song;
 	}
 	
 	public String deleteSong(String song) {
