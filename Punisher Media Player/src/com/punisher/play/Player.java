@@ -51,7 +51,6 @@ public class Player extends Application{
 	MediaView mediaView;
 	HBox mediaBar;
 	BorderPane bp = new BorderPane();
-	private Duration duration;
 	private Slider timeSlider;
 	private Label playTime;
 	private Slider volumeSlider;
@@ -135,7 +134,7 @@ public class Player extends Application{
 						Media sound = audio.returnAudioFile();
 						player = new MediaPlayer(sound);
 						initializeMediaView();
-						duration = player.getMedia().getDuration();
+						
 						//CheckMediaStatus();
 					}
 					else
@@ -180,7 +179,7 @@ public class Player extends Application{
 						Media recording = video.returnVideoFile();
 						player = new MediaPlayer(recording);
 						initializeMediaView();
-						duration = player.getMedia().getDuration();
+						
 						//CheckMediaStatus();
 					}
 					else
@@ -214,17 +213,18 @@ public class Player extends Application{
 				player.play();
 			}
 		});
-<<<<<<< HEAD
-		
+		if(player != null)
+		{
 		player.setOnReady(new Runnable() {
             public void run() {
-                duration = player.getMedia().getDuration();
                 updateValues();
             }
         });
 		
+		}
 		
-=======
+		
+
 		Button  add = new Button("Add Song");
 		add.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -251,7 +251,7 @@ public class Player extends Application{
 			}
 		});
 
->>>>>>> origin/master
+
 		Button playlistbtn = new Button("PlayList");
 		playlistbtn.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -275,7 +275,7 @@ public class Player extends Application{
 			public void invalidated(Observable ov) {
 				if (timeSlider.isValueChanging()) {
 					// multiply duration by percentage calculated by slider position
-					player.seek(duration.multiply(timeSlider.getValue() / 100.0));
+					player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue() / 100.0));
 				}
 			}
 		});
@@ -310,16 +310,18 @@ public class Player extends Application{
 	}
 
 	protected void updateValues() {
+		if(player != null)
+		{
 		if (playTime != null && timeSlider != null && volumeSlider != null) {
 			Platform.runLater(new Runnable() {
 				public void run() {
 					Duration currentTime = player.getCurrentTime();
-					playTime.setText(formatTime(currentTime, duration));
-					timeSlider.setDisable(duration.isUnknown());
+					playTime.setText(formatTime(currentTime, player.getMedia().getDuration()));
+					timeSlider.setDisable(player.getMedia().getDuration().isUnknown());
 					if (!timeSlider.isDisabled()
-							&& duration.greaterThan(Duration.ZERO)
+							&& player.getMedia().getDuration().greaterThan(Duration.ZERO)
 							&& !timeSlider.isValueChanging()) {
-						timeSlider.setValue(currentTime.divide(duration).toMillis()
+						timeSlider.setValue(currentTime.divide(player.getMedia().getDuration()).toMillis()
 								* 100.0);
 					}
 					if (!volumeSlider.isValueChanging()) {
@@ -328,6 +330,7 @@ public class Player extends Application{
 					}
 				}
 			});
+		}
 		}
 	}
 
