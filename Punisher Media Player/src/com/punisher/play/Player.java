@@ -7,6 +7,9 @@ import java.io.File;
 import com.sun.javafx.geom.Rectangle;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
@@ -17,12 +20,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,6 +36,7 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class Player extends Application{
@@ -37,6 +44,10 @@ public class Player extends Application{
 	MediaView mediaView;
 	HBox mediaBar;
 	BorderPane bp = new BorderPane();
+	private Duration duration;
+    private Slider timeSlider;
+    private Label playTime;
+    private Slider volumeSlider;
 	
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -98,7 +109,7 @@ public class Player extends Application{
         BorderPane.setAlignment(mediaBar, Pos.CENTER);
         
         Image playimage = new Image("file:playimg.png");
-		Button music = new Button("Play", new ImageView(playimage));
+		Button music = new Button("Load Music", new ImageView(playimage));
 		music.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -117,12 +128,12 @@ public class Player extends Application{
 						Media sound = audio.returnAudioFile();
 						player = new MediaPlayer(sound);
 						initializeMediaView();
-
-						CheckMediaStatus();
+						duration = player.getMedia().getDuration();
+						//CheckMediaStatus();
 					}
 					else
 					{
-						CheckMediaStatus();
+						//CheckMediaStatus();
 					}
 					//	audio.PlayAudioFile(primaryStage);
 				}
@@ -134,8 +145,17 @@ public class Player extends Application{
 				//				audio.PlayAudioFile(primaryStage);
 			}
 		});
+		if(player != null)
+		{
+			player.currentTimeProperty().addListener(new InvalidationListener() {
+	            public void invalidated(Observable ov) {
+	                updateValues();
+	            }
+	        });
+		}
+		
 
-		Button video = new Button("Play Video");
+		Button video = new Button("Load Video");
 		video.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
@@ -153,11 +173,12 @@ public class Player extends Application{
 						Media recording = video.returnVideoFile();
 						player = new MediaPlayer(recording);
 						initializeMediaView();
-						CheckMediaStatus();
+						duration = player.getMedia().getDuration();
+						//CheckMediaStatus();
 					}
 					else
 					{
-						CheckMediaStatus();
+						//CheckMediaStatus();
 					}
 				}
 				
@@ -165,24 +186,6 @@ public class Player extends Application{
 				//
 				//				VideoFile video = new VideoFile();
 				//				video.PlayVideoFile(primaryStage);
-			}
-		});
-		Button FastForward = new Button(">>");
-		FastForward.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-
-			}
-		});
-		Button Rewind = new Button("<<");
-		Rewind.setOnAction(new EventHandler<ActionEvent>(){
-
-			@Override
-			public void handle(ActionEvent event)
-			{
-				//this is where you rewind
 			}
 		});
 		Button pause = new Button("Pause");
@@ -195,6 +198,17 @@ public class Player extends Application{
 			}
 		});
 		
+		Button play = new Button("Play");
+		play.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				player.play();
+			}
+		});
+		
+		
 		Button playlistbtn = new Button("PlayList");
 		playlistbtn.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -205,12 +219,76 @@ public class Player extends Application{
 				pc.CreatePlaylist();
 			}
 		});
+		
+		Label timeLabel = new Label("Time: ");
+        mediaBar.getChildren().add(timeLabel);
 
-		mediaBar.getChildren().addAll(Rewind,pause,music, video,FastForward, playlistbtn);
+        // Add time slider
+        timeSlider = new Slider();
+        HBox.setHgrow(timeSlider, Priority.ALWAYS);
+        timeSlider.setMinWidth(50);
+        timeSlider.setMaxWidth(Double.MAX_VALUE);
+        timeSlider.valueProperty().addListener(new InvalidationListener() {
+            public void invalidated(Observable ov) {
+                if (timeSlider.isValueChanging()) {
+                    // multiply duration by percentage calculated by slider position
+                    player.seek(duration.multiply(timeSlider.getValue() / 100.0));
+                }
+            }
+        });
+        mediaBar.getChildren().add(timeSlider);
+
+        // Add Play label
+        playTime = new Label();
+        playTime.setPrefWidth(130);
+        playTime.setMinWidth(50);
+        mediaBar.getChildren().add(playTime);
+
+        // Add the volume label
+        Label volumeLabel = new Label("Vol: ");
+        mediaBar.getChildren().add(volumeLabel);
+
+        // Add Volume slider
+        volumeSlider = new Slider();
+        volumeSlider.setPrefWidth(70);
+        volumeSlider.setMaxWidth(Region.USE_PREF_SIZE);
+        volumeSlider.setMinWidth(30);
+        volumeSlider.valueProperty().addListener(new InvalidationListener() {
+            public void invalidated(Observable ov) {
+                if (volumeSlider.isValueChanging()) {
+                    player.setVolume(volumeSlider.getValue() / 100.0);
+                }
+            }
+        });
+        mediaBar.getChildren().add(volumeSlider);
+
+		mediaBar.getChildren().addAll(play, pause,music, video, playlistbtn);
 		bp.setBottom(mediaBar);
 	}
 	
-	protected boolean CheckMediaStatus()
+	protected void updateValues() {
+        if (playTime != null && timeSlider != null && volumeSlider != null) {
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Duration currentTime = player.getCurrentTime();
+                    playTime.setText(formatTime(currentTime, duration));
+                    timeSlider.setDisable(duration.isUnknown());
+                    if (!timeSlider.isDisabled()
+                            && duration.greaterThan(Duration.ZERO)
+                            && !timeSlider.isValueChanging()) {
+                        timeSlider.setValue(currentTime.divide(duration).toMillis()
+                                * 100.0);
+                    }
+                    if (!volumeSlider.isValueChanging()) {
+                        volumeSlider.setValue((int) Math.round(player.getVolume()
+                                * 100));
+                    }
+                }
+            });
+        }
+	}
+	
+	/*protected boolean CheckMediaStatus()
 	{
 		boolean validStatus = false;
 		Status playerStatus = player.getStatus();
@@ -230,7 +308,7 @@ public class Player extends Application{
 		}
 		return validStatus;
 		
-	}
+	}*/              
 	
 	public boolean CheckIfAtEnd()
 	{
@@ -238,4 +316,44 @@ public class Player extends Application{
 		isAtEnd = player.getCurrentTime() == player.getStopTime();
 		return isAtEnd;
 	}
+	
+	private static String formatTime(Duration elapsed, Duration duration) {
+        int intElapsed = (int) Math.floor(elapsed.toSeconds());
+        int elapsedHours = intElapsed / (60 * 60);
+        if (elapsedHours > 0) {
+            intElapsed -= elapsedHours * 60 * 60;
+        }
+        int elapsedMinutes = intElapsed / 60;
+        int elapsedSeconds = intElapsed - elapsedHours * 60 * 60
+                - elapsedMinutes * 60;
+
+        if (duration.greaterThan(Duration.ZERO)) {
+            int intDuration = (int) Math.floor(duration.toSeconds());
+            int durationHours = intDuration / (60 * 60);
+            if (durationHours > 0) {
+                intDuration -= durationHours * 60 * 60;
+            }
+            int durationMinutes = intDuration / 60;
+            int durationSeconds = intDuration - durationHours * 60 * 60
+                    - durationMinutes * 60;
+            if (durationHours > 0) {
+                return String.format("%d:%02d:%02d/%d:%02d:%02d",
+                        elapsedHours, elapsedMinutes, elapsedSeconds,
+                        durationHours, durationMinutes, durationSeconds);
+            } else {
+                return String.format("%02d:%02d/%02d:%02d",
+                        elapsedMinutes, elapsedSeconds, durationMinutes,
+                        durationSeconds);
+            }
+        } else {
+            if (elapsedHours > 0) {
+                return String.format("%d:%02d:%02d", elapsedHours,
+                        elapsedMinutes, elapsedSeconds);
+            } else {
+                return String.format("%02d:%02d", elapsedMinutes,
+                        elapsedSeconds);
+            }
+        }
+	}
+
 }
