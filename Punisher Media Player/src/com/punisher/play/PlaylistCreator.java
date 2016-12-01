@@ -49,13 +49,13 @@ public class PlaylistCreator extends JPanel {
 		    JButton addButton = new JButton("Add Song");
 		    JButton removeButton = new JButton("Remove Song");
 		    for (int i = 0; i < 15; i++)
-		      model.addElement("Element " + i);
+		      model.addElement("Song " + i);
 
 		    addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				 model.addElement("Element " + counter);
+				 model.addElement("Song " + counter);
 			        counter++;
 			}
 		    });
@@ -93,6 +93,16 @@ public void MakePlaylist() {
 		}
 	});
 	
+	Button deleteplaylistbtn = new Button("Delete Playlist");
+	deleteplaylistbtn.setOnAction(new EventHandler<ActionEvent>(){
+
+		@Override
+		public void handle(ActionEvent event)
+		{
+			//CreatePlaylist();
+		}
+	});
+	
 	//Code that adds the contents of the folder to the vbox inside of the scrollpane
 	 File f = new File("Content/Audio/");// current directory
 	
@@ -126,7 +136,7 @@ public void MakePlaylist() {
 	flow.setPadding(new Insets(10, 10, 10, 10));
 	flow.setStyle("-fx-background-color: black;");
 	flow.setHgap(5);
-	flow.getChildren().addAll(playlist,makeplaylistbtn);
+	flow.getChildren().addAll(playlist,makeplaylistbtn,deleteplaylistbtn);
 
 	Scene scene = new Scene(flow);
 	Playlist.setScene(scene);
