@@ -216,7 +216,7 @@ public class Player extends Application{
 			public void handle(ActionEvent event)
 			{
 				PlaylistCreator pc = new PlaylistCreator();
-				pc.CreatePlaylist();
+				pc.MakePlaylist();
 			}
 		});
 		
