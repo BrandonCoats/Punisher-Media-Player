@@ -57,12 +57,10 @@ public class Player extends Application{
 		VBox content = new VBox();
 		playlist.setContent(content);
 		//try to add content to the playlist
-		Label label = new Label("hello");
+		Label label = new Label("The Songs would go here");
+		
 		content.getChildren().add(label);
 		initializeMediaView();
-		//hello
-		//force upload
-		//work
 		
 		
 		bp.setLeft(playlist);
@@ -78,6 +76,7 @@ public class Player extends Application{
 	public File searchFile(Stage primaryStage, FileChooser.ExtensionFilter filter)
 	{
 		FileChooser fileChooser = new FileChooser();
+		fileChooser.setInitialDirectory(new File("../Punisher Media Player/Content"));
 		fileChooser.setTitle("Open file");
 		fileChooser.getExtensionFilters().add(filter);
 		File file = fileChooser.showOpenDialog(primaryStage);
@@ -164,7 +163,7 @@ public class Player extends Application{
 
 				FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
 				File file = searchFile((Stage) mediaBar.getScene().getWindow(), filter);
-
+				
 				if(file != null){
 					if(player == null || player.getMedia() != null)
 					{
@@ -215,8 +214,8 @@ public class Player extends Application{
 			@Override
 			public void handle(ActionEvent event)
 			{
-				PlaylistCreator pc = new PlaylistCreator();
-				pc.MakePlaylist();
+//				PlaylistCreator pc = new PlaylistCreator();
+//				pc.MakePlaylist();
 			}
 		});
 		
