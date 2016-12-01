@@ -67,6 +67,7 @@ public class Player extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+	
 	public void Launcher()
 	{
 		launch();
@@ -205,6 +206,13 @@ public class Player extends Application{
 				player.play();
 			}
 		});
+		
+		player.setOnReady(new Runnable() {
+            public void run() {
+                duration = player.getMedia().getDuration();
+                updateValues();
+            }
+        });
 		
 		
 		Button playlistbtn = new Button("PlayList");
